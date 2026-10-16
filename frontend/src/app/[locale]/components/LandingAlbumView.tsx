@@ -78,9 +78,6 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
         </div>
       </section>
 
-      {/* Cultural Woven Motif Stripe */}
-      <div className="woven-edge" aria-hidden="true" />
-
       {/* ── Role Selection (Immediately visible above the fold) ── */}
       <section
         id="roles-section"
@@ -101,53 +98,59 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
           {/* 1. Patient / Elder Role */}
           <Link
             href="/play"
-            className="group flex flex-col justify-between rounded-[var(--radius-card)] p-6 no-underline border-2 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]"
+            className="group flex flex-col justify-between rounded-[var(--radius-card)] p-5 md:p-6 no-underline border-2 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] overflow-hidden"
             style={{
               background: "var(--surface)",
               borderColor: "var(--primary)",
             }}
           >
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              {/* Photo Header */}
+              <div className="w-full h-36 rounded-xl overflow-hidden relative shadow-inner border border-black/10">
+                <img
+                  src="/memora-assets/patient_elder_activity.jpg"
+                  alt="Older adult playing memory activities"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <span
+                  className="absolute bottom-2 left-2 text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider text-white bg-black/60 backdrop-blur-sm"
+                >
+                  Elder Mode
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm"
                   style={{
                     background: "var(--primary)",
                     color: "var(--primary-ink)",
                   }}
                   aria-hidden="true"
                 >
-                  <Flower2 size={28} />
+                  <Flower2 size={20} />
                 </div>
-                <span
-                  className="text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"
-                  style={{
-                    background: "var(--primary-light)",
-                    color: "var(--primary-dark)",
-                  }}
-                >
-                  Elder Mode
-                </span>
+                <div>
+                  <span
+                    className="text-lg md:text-xl font-bold block leading-snug"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    {t("patientTitle")}
+                  </span>
+                </div>
               </div>
 
-              <div>
-                <span
-                  className="text-xl md:text-2xl font-bold block leading-snug"
-                  style={{ color: "var(--ink)" }}
-                >
-                  {t("patientTitle")}
-                </span>
-                <span
-                  className="text-sm block mt-1.5 leading-relaxed"
-                  style={{ color: "var(--ink-soft)" }}
-                >
-                  {t("patientSubtitle")}
-                </span>
-              </div>
+              <p
+                className="text-xs md:text-sm leading-relaxed"
+                style={{ color: "var(--ink-soft)" }}
+              >
+                {t("patientSubtitle")}
+              </p>
             </div>
 
             <div
-              className="pt-6 mt-4 border-t flex items-center justify-between text-sm font-bold"
+              className="pt-4 mt-4 border-t flex items-center justify-between text-sm font-bold"
               style={{
                 borderColor: "var(--border-soft)",
                 color: "var(--primary)",
@@ -165,53 +168,59 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
           {/* 2. Caregiver / Family Role */}
           <Link
             href="/care"
-            className="group flex flex-col justify-between rounded-[var(--radius-card)] p-6 no-underline border-2 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]"
+            className="group flex flex-col justify-between rounded-[var(--radius-card)] p-5 md:p-6 no-underline border-2 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] overflow-hidden"
             style={{
               background: "var(--surface)",
               borderColor: "var(--accent)",
             }}
           >
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              {/* Photo Header */}
+              <div className="w-full h-36 rounded-xl overflow-hidden relative shadow-inner border border-black/10">
+                <img
+                  src="/memora-assets/caregiver_family_memory.jpg"
+                  alt="Family sharing memory photo album"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <span
+                  className="absolute bottom-2 left-2 text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider text-white bg-black/60 backdrop-blur-sm"
+                >
+                  Family Care
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm"
                   style={{
                     background: "var(--accent-dark)",
                     color: "var(--accent-ink)",
                   }}
                   aria-hidden="true"
                 >
-                  <HomeIcon size={28} />
+                  <HomeIcon size={20} />
                 </div>
-                <span
-                  className="text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"
-                  style={{
-                    background: "var(--accent-light)",
-                    color: "var(--accent-dark)",
-                  }}
-                >
-                  Family Portal
-                </span>
+                <div>
+                  <span
+                    className="text-lg md:text-xl font-bold block leading-snug"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    {t("caregiverTitle")}
+                  </span>
+                </div>
               </div>
 
-              <div>
-                <span
-                  className="text-xl md:text-2xl font-bold block leading-snug"
-                  style={{ color: "var(--ink)" }}
-                >
-                  {t("caregiverTitle")}
-                </span>
-                <span
-                  className="text-sm block mt-1.5 leading-relaxed"
-                  style={{ color: "var(--ink-soft)" }}
-                >
-                  {t("caregiverSubtitle")}
-                </span>
-              </div>
+              <p
+                className="text-xs md:text-sm leading-relaxed"
+                style={{ color: "var(--ink-soft)" }}
+              >
+                {t("caregiverSubtitle")}
+              </p>
             </div>
 
             <div
-              className="pt-6 mt-4 border-t flex items-center justify-between text-sm font-bold"
+              className="pt-4 mt-4 border-t flex items-center justify-between text-sm font-bold"
               style={{
                 borderColor: "var(--border-soft)",
                 color: "var(--accent-dark)",
@@ -229,53 +238,59 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
           {/* 3. ASHA / Clinician Role */}
           <Link
             href="/asha"
-            className="group flex flex-col justify-between rounded-[var(--radius-card)] p-6 no-underline border-2 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]"
+            className="group flex flex-col justify-between rounded-[var(--radius-card)] p-5 md:p-6 no-underline border-2 transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] overflow-hidden"
             style={{
               background: "var(--surface)",
               borderColor: "var(--success)",
             }}
           >
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              {/* Photo Header */}
+              <div className="w-full h-36 rounded-xl overflow-hidden relative shadow-inner border border-black/10">
+                <img
+                  src="/memora-assets/asha_health_worker.jpg"
+                  alt="ASHA community health worker in village"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <span
+                  className="absolute bottom-2 left-2 text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider text-white bg-black/60 backdrop-blur-sm"
+                >
+                  Health Worker
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm"
                   style={{
                     background: "var(--success)",
                     color: "var(--primary-ink)",
                   }}
                   aria-hidden="true"
                 >
-                  <Stethoscope size={28} />
+                  <Stethoscope size={20} />
                 </div>
-                <span
-                  className="text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"
-                  style={{
-                    background: "var(--success-light)",
-                    color: "var(--success)",
-                  }}
-                >
-                  Health Worker
-                </span>
+                <div>
+                  <span
+                    className="text-lg md:text-xl font-bold block leading-snug"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    {t("ashaTitle")}
+                  </span>
+                </div>
               </div>
 
-              <div>
-                <span
-                  className="text-xl md:text-2xl font-bold block leading-snug"
-                  style={{ color: "var(--ink)" }}
-                >
-                  {t("ashaTitle")}
-                </span>
-                <span
-                  className="text-sm block mt-1.5 leading-relaxed"
-                  style={{ color: "var(--ink-soft)" }}
-                >
-                  {t("ashaSubtitle")}
-                </span>
-              </div>
+              <p
+                className="text-xs md:text-sm leading-relaxed"
+                style={{ color: "var(--ink-soft)" }}
+              >
+                {t("ashaSubtitle")}
+              </p>
             </div>
 
             <div
-              className="pt-6 mt-4 border-t flex items-center justify-between text-sm font-bold"
+              className="pt-4 mt-4 border-t flex items-center justify-between text-sm font-bold"
               style={{
                 borderColor: "var(--border-soft)",
                 color: "var(--success)",

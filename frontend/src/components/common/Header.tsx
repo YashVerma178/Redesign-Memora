@@ -33,15 +33,13 @@ export function Header() {
   return (
     <>
       <header
-        className="sticky top-0 z-40 w-full"
+        className="sticky top-0 z-40 w-full border-b"
         style={{
           background: isPatientRoute ? "var(--primary)" : "var(--primary-dark)",
+          borderColor: "rgba(255, 255, 255, 0.08)",
           boxShadow: "var(--shadow-sm)",
         }}
       >
-        {/* Cultural woven motif */}
-        <div className="woven-edge" />
-
         <div className="max-w-6xl mx-auto px-4 py-2 md:py-2.5 flex items-center justify-between gap-3">
           {/* ── Brand / Logo Mark ── */}
           <Link
