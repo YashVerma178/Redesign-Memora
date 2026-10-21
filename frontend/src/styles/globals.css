@@ -304,26 +304,26 @@ button, input, select, textarea {
 
 /* High contrast mode: monochrome surfaces keep body copy at maximum contrast. */
 :root.high-contrast {
-  --bg: #000000;
-  --surface: #000000;
-  --surface-2: #111111;
-  --surface-hover: #222222;
-  --ink: #ffffff;
-  --ink-soft: #ffffff;
-  --ink-muted: #eeeeee;
-  --primary: #ffffff;
-  --primary-dark: #ffffff;
-  --primary-light: #222222;
-  --primary-ink: #000000;
-  --accent: #ffffff;
-  --accent-dark: #ffffff;
-  --accent-light: #222222;
-  --accent-ink: #000000;
-  --success: #ffffff;
-  --success-light: #222222;
-  --border: #ffffff;
-  --border-soft: #ffffff;
-  --border-focus: #ffffff;
+  --bg: var(--hc-bg);
+  --surface: var(--hc-surface);
+  --surface-2: var(--hc-surface-2);
+  --surface-hover: var(--hc-surface-hover);
+  --ink: var(--hc-ink);
+  --ink-soft: var(--hc-ink-soft);
+  --ink-muted: var(--hc-ink-muted);
+  --primary: var(--hc-primary);
+  --primary-dark: var(--hc-primary-dark);
+  --primary-light: var(--hc-primary-light);
+  --primary-ink: var(--hc-primary-ink);
+  --accent: var(--hc-accent);
+  --accent-dark: var(--hc-accent-dark);
+  --accent-light: var(--hc-accent-light);
+  --accent-ink: var(--hc-accent-ink);
+  --success: var(--hc-success);
+  --success-light: var(--hc-success-light);
+  --border: var(--hc-border);
+  --border-soft: var(--hc-border-soft);
+  --border-focus: var(--hc-border-focus);
   --shadow-xs: none;
   --shadow-sm: none;
   --shadow-md: none;
