@@ -4,14 +4,14 @@
      ───────────────────────────────────────────── */
 
   /* Base Palette */
-  --bg:           #F9F6F0;   /* warm paper */
+  --bg:           #FBF8F3;   /* warm off-white from DESIGN.md */
   --surface:      #FFFFFF;
   --surface-2:    #F3EFE8;   /* nested card / section bg */
   --surface-hover:#EDE9E1;
 
   /* Ink */
-  --ink:          #1A1917;   /* near-black body text, contrast > 12:1 on --bg */
-  --ink-soft:     #52504C;   /* secondary text */
+  --ink:          #1F2933;   /* body text (DESIGN.md canonical) */
+  --ink-soft:     #4B5563;   /* secondary text (DESIGN.md canonical) */
   --ink-muted:    #8A8680;   /* captions, timestamps, placeholders */
 
   /* Primary — calm teal (DESIGN.md canonical) */
@@ -48,7 +48,7 @@
 
   /* Shadows */
   --shadow-xs:    0 1px 2px rgba(26,25,23,.06);
-  --shadow-sm:    0 1px 4px rgba(26,25,23,.08);
+  --shadow-sm:    0 2px 8px rgba(0,0,0,.08);
   --shadow-md:    0 4px 12px rgba(26,25,23,.10);
   --shadow-lg:    0 8px 24px rgba(26,25,23,.12);
 

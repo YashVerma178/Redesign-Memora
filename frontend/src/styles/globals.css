@@ -74,6 +74,8 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -109,7 +111,7 @@ html, body {
   padding: 14px 24px;
   font-size: 1.2rem;
   font-weight: 700;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   border: 2px solid transparent;
   cursor: pointer;
   transition: transform var(--duration-fast) var(--ease-out),
@@ -174,8 +176,12 @@ html, body {
 
 .card-section {
   background: var(--surface-2);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-card);
   border: 1px solid var(--border-soft);
+}
+
+button, input, select, textarea {
+  font: inherit;
 }
 
 /* ── Status badge utilities ── */

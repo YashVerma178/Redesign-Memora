@@ -24,8 +24,6 @@ export function Header() {
   const { calmMode, toggleCalmMode } = useMemoraStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isPatientRoute = pathname.includes("/play");
-
   const handleLocaleChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });
   };
@@ -35,8 +33,8 @@ export function Header() {
       <header
         className="sticky top-0 z-40 w-full border-b"
         style={{
-          background: isPatientRoute ? "var(--primary)" : "var(--primary-dark)",
-          borderColor: "rgba(255, 255, 255, 0.08)",
+          background: "var(--primary)",
+          borderColor: "var(--primary-dark)",
           boxShadow: "var(--shadow-sm)",
         }}
       >
