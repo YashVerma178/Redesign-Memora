@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { getPathname, Link, usePathname } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowLeft, Globe, Type, Sun, Activity, Volume2, Check } from "lucide-react";
 import { useMemoraStore, type FontSizePreference } from "@/lib/store/useMemoraStore";
@@ -14,12 +14,11 @@ const LOCALES = [
   { code: "bn", label: "বাংলা", script: "Bengali (Bengali)" },
   { code: "brx", label: "बड़ो", script: "Devanagari (Bodo)" },
   { code: "mni", label: "ꯃꯩ", script: "Meetei Mayek (Manipuri)" },
-];
+] as const;
 
 export default function SettingsPage() {
   const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
 
   const {
     calmMode,
@@ -32,8 +31,9 @@ export default function SettingsPage() {
     setAudioAssistance,
   } = useMemoraStore();
 
-  const handleLanguageChange = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+  const handleLanguageChange = (newLocale: (typeof LOCALES)[number]["code"]) => {
+    const target = getPathname({ locale: newLocale, href: pathname });
+    window.location.assign(`${target}${window.location.search}${window.location.hash}`);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/routing";
@@ -25,6 +25,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const t = await getTranslations("Common");
 
   const showEventBadge = process.env.NEXT_PUBLIC_SHOW_EVENT_BADGE === "true";
 
@@ -53,18 +54,18 @@ export default async function LocaleLayout({
           >
             <div className="max-w-4xl mx-auto space-y-2">
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-semibold" style={{ color: "var(--ink-soft)" }}>
-                <span>Memora · North East India</span>
+                <span>{t("appName")} · {t("regionName")}</span>
                 <span aria-hidden="true" className="opacity-40">·</span>
                 <Link href="/privacy" className="hover:underline">
-                  Privacy & Consent
+                  {t("privacy")}
                 </Link>
                 <span aria-hidden="true" className="opacity-40">·</span>
                 <Link href="/settings" className="hover:underline">
-                  Settings
+                  {t("settings")}
                 </Link>
                 <span aria-hidden="true" className="opacity-40">·</span>
                 <Link href="/sync" className="hover:underline">
-                  Sync Status
+                  {t("syncStatus")}
                 </Link>
                 {showEventBadge && (
                   <>
@@ -76,8 +77,7 @@ export default async function LocaleLayout({
                 )}
               </div>
               <p className="text-[11px] leading-tight max-w-xl mx-auto">
-                Non-diagnostic cognitive stimulation and caregiver assistance platform.
-                Consult a healthcare professional for clinical advice.
+                {t("disclaimer")}
               </p>
             </div>
           </footer>

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { getPathname, Link, usePathname } from "@/i18n/routing";
 import { Menu, Activity, Globe, ChevronDown } from "lucide-react";
 import { useMemoraStore } from "@/lib/store/useMemoraStore";
 import { FullscreenMenu } from "./FullscreenMenu";
@@ -15,14 +15,13 @@ const LOCALES = [
   { code: "bn", label: "বাং", full: "বাংলা" },
   { code: "brx", label: "बड़", full: "बड़ो" },
   { code: "mni", label: "ꯃꯩ", full: "মৈতৈলোন্" },
-];
+] as const;
 
 export function Header() {
   const t = useTranslations("Common");
   const tRoles = useTranslations("Roles");
   const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
   const { calmMode, toggleCalmMode } = useMemoraStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
@@ -30,9 +29,10 @@ export function Header() {
   const isPatientRoute = pathname.includes("/play");
   const isCalmHome = pathname === "/" && calmMode;
 
-  const handleLocaleChange = (newLocale: string) => {
+  const handleLocaleChange = (newLocale: (typeof LOCALES)[number]["code"]) => {
     setIsLanguageMenuOpen(false);
-    router.replace(pathname, { locale: newLocale });
+    const target = getPathname({ locale: newLocale, href: pathname });
+    window.location.assign(`${target}${window.location.search}${window.location.hash}`);
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export function Header() {
                 className="text-[10px] font-semibold tracking-widest uppercase block leading-tight mt-0.5"
                 style={{ color: isCalmHome ? "var(--ink-soft)" : "var(--primary-light)", opacity: 0.9 }}
               >
-                North East India
+                {t("regionName")}
               </span>
             </div>
           </Link>

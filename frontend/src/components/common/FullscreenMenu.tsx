@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link, usePathname } from "@/i18n/routing";
 import { X, Sparkles, Heart, Activity, ShieldCheck, Home, Eye, Wifi, Settings, Box } from "lucide-react";
@@ -11,21 +12,22 @@ interface FullscreenMenuProps {
   onClose: () => void;
 }
 
-const MENU_LINKS = [
-  { href: "/", label: "Home", icon: Home, badge: "Showcase" },
-  { href: "/play", label: "Patient Activities", icon: Sparkles, badge: "Calm" },
-  { href: "/care", label: "Caregiver Portal", icon: Heart, badge: "Family" },
-  { href: "/asha", label: "ASHA Clinical Triage", icon: Eye, badge: "Community" },
-  { href: "/house", label: "3D Memory House", icon: Box, badge: "Gallery" },
-  { href: "/sync", label: "Offline & Sync Center", icon: Wifi, badge: "Local" },
-  { href: "/settings", label: "Accessibility Settings", icon: Settings, badge: "Preferences" },
-  { href: "/privacy", label: "Privacy & Consent", icon: ShieldCheck, badge: "DPDP 2023" },
-];
-
 export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
+  const t = useTranslations("Common");
+  const tRoles = useTranslations("Roles");
   const pathname = usePathname();
   const { calmMode, toggleCalmMode } = useMemoraStore();
   const dialogRef = useRef<HTMLDivElement>(null);
+  const menuLinks = [
+    { href: "/", label: t("home"), icon: Home, badge: t("galleryMode") },
+    { href: "/play", label: tRoles("patientTitle"), icon: Sparkles, badge: t("calmMode") },
+    { href: "/care", label: tRoles("caregiverTitle"), icon: Heart, badge: t("family") },
+    { href: "/asha", label: tRoles("ashaTitle"), icon: Eye, badge: t("community") },
+    { href: "/house", label: t("memoryHouse"), icon: Box, badge: t("galleryMode") },
+    { href: "/sync", label: t("sync"), icon: Wifi, badge: t("offline") },
+    { href: "/settings", label: t("settings"), icon: Settings, badge: t("preferences") },
+    { href: "/privacy", label: t("privacy"), icon: ShieldCheck, badge: t("privacy") },
+  ];
 
   // Close on Escape key
   useEffect(() => {
@@ -56,7 +58,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Navigation Menu"
+      aria-label={t("menu")}
       ref={dialogRef}
       className="glass-menu-overlay fixed inset-0 z-50 flex flex-col justify-between p-4 sm:p-6 md:p-8 transition-opacity duration-300"
       style={{
@@ -77,8 +79,8 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
             className="h-10 w-10 shrink-0 rounded-full border border-[var(--accent-light)] object-cover"
           />
           <div>
-            <span className="text-xl font-bold tracking-tight block">Memora</span>
-            <span className="text-xs uppercase tracking-wider block opacity-75">North East India</span>
+            <span className="text-xl font-bold tracking-tight block">{t("appName")}</span>
+            <span className="text-xs uppercase tracking-wider block opacity-75">{t("regionName")}</span>
           </div>
         </div>
 
@@ -97,7 +99,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
             aria-pressed={calmMode}
           >
             <Activity size={16} />
-            <span>Calm Mode: {calmMode ? "ON" : "OFF"}</span>
+            <span>{t("calmMode")}: {calmMode ? t("calmModeOn") : t("calmModeOff")}</span>
           </button>
 
           {/* Close button */}
@@ -106,7 +108,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
             onClick={onClose}
             className="glass-menu-close w-12 h-12 rounded-full border flex items-center justify-center transition-colors cursor-pointer"
             style={{ color: "var(--bg)" }}
-            aria-label="Close menu"
+            aria-label={t("close")}
           >
             <X size={26} aria-hidden="true" />
           </button>
@@ -114,8 +116,8 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       </div>
 
       {/* ── Menu Links with Struck-Through Current Page ── */}
-      <nav className="my-auto grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 gap-3 py-5 sm:py-7 overflow-y-auto" aria-label="Main navigation">
-        {MENU_LINKS.map((item) => {
+      <nav className="my-auto grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 gap-3 py-5 sm:py-7 overflow-y-auto" aria-label={t("menu")}>
+        {menuLinks.map((item) => {
           const isCurrent =
             pathname === item.href ||
             (item.href !== "/" && pathname.startsWith(item.href));
@@ -148,8 +150,8 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
 
       {/* ── Footer within Menu ── */}
       <div className="glass-menu-footer flex flex-wrap items-center justify-between gap-2 rounded-[var(--radius-card)] border px-4 py-3 text-[11px] sm:px-5 sm:text-xs">
-        <p>Offline-first · Zero facial tracking · DPDP Act 2023 compliant</p>
-        <p>Built for North East India (SIH26003)</p>
+        <p>{t("menuFooterPrivacy")}</p>
+        <p>{t("menuFooterRegion", { region: t("regionName") })}</p>
       </div>
     </div>
   );

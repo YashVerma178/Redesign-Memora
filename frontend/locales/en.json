@@ -27,7 +27,16 @@
     "settings": "Settings",
     "privacy": "Privacy & Consent",
     "disclaimer": "Memora is a cognitive stimulation and memory companion platform, not a medical device. For health questions, consider consulting a doctor.",
-    "switchToGallery": "Switch to Cinematic Gallery"
+    "switchToGallery": "Switch to Cinematic Gallery",
+    "regionName": "North East India",
+    "family": "Family",
+    "community": "Community",
+    "memoryHouse": "3D Memory House",
+    "offline": "Local",
+    "preferences": "Preferences",
+    "menuFooterPrivacy": "Offline-first · No facial tracking · DPDP Act 2023 compliant",
+    "menuFooterRegion": "Built for {region} (SIH26003)",
+    "syncStatus": "Sync Status"
   },
   "Roles": {
     "selectRole": "Select Your Role",
