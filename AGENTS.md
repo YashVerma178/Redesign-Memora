@@ -77,7 +77,7 @@ docker compose up --build
 13. **Design system compliance.** All UI work must follow `DESIGN.md`. Do not invent new colors, sizes or components.
 
 ## 8. Current state (update every session)
-- Phase: **UI Redesign B27-B30 (B27 Foundation fixes + shell, B28 Cinematic landing, B29 Caregiver & ASHA polish, B30 3D memory house). Amendment A1 added to DESIGN.md section 9.**
+- Phase: **UI Redesign B27-B30 complete. Current follow-up: warm, responsive Calm Mode landing page with localized hero actions, role cards, and a how-it-works section. Amendment A1 remains in DESIGN.md section 9.**
 - Done:
   - P1 Foundation: B01 (PWA plan), B02 (Frontend scaffold + tokens + Dexie + locales), B03 (FastAPI auth + RLS + consent gating + idempotent events), B04 (Anomaly detection + Monte Carlo simulation + synthetic evidence), B05 (Playwright E2E + axe a11y + CI).
   - P2 Patient Core: B06 (Patient home + Memory Match game with NER cultural pairs), B07 (Adaptive session flow + 3-consecutive-error stop rules + orientation card), B08 (Backend sync + ability recalculation + ability history endpoint), B09 (Offline sync client with batching up to 200, strict ack deletion, backoff, and reconnect auto-sync).
@@ -94,6 +94,7 @@ docker compose up --build
 - 2026-10-21 session: replaced the header's always-visible locale row with one localized Language button and an accessible dropdown listing all six supported languages. Locale routing remains unchanged; `npx tsc --noEmit` and `git diff --check` pass.
 - 2026-10-21 session: used the provided Memora logo PNG for the header, home hero, fullscreen menu, browser icons, and PWA manifest. The PWA manifest references the PNG as an unrestricted icon source to match its actual image dimensions.
 - 2026-10-21 session: fixed Calm mode transitions so ON selects the light Album presentation and OFF returns to the dark Cinematic Gallery. The explicit Gallery switch remains available from Album; `npx tsc --noEmit` and `git diff --check` pass.
+- 2026-10-21 session: redesigned the calm landing page with local photo-led role cards, Get Started and How it works anchors, an explainer section, and a trust row. Added light homepage navigation while Calm Mode is ON and localized the new controls in all six supported languages. `npx tsc --noEmit`, `git diff --check`, and locale-key parity check pass; full test suites were not run.
 
 ## 9. Decision log (append only)
 | Date | Decision | Why |
@@ -134,6 +135,7 @@ docker compose up --build
 | 2026-10 | Show one localized Language control in the header and reveal locale choices on click | Reduces header clutter while keeping all six locales easy to find |
 | 2026-10 | Use the supplied Memora logo PNG for brand marks and app icons | Keeps the product identity consistent across the web app and installed PWA |
 | 2026-10 | Calm mode ON selects Album; turning it OFF restores Cinematic Gallery | Makes the global Calm toggle produce a clear, reversible light/dark presentation change |
+| 2026-10 | Calm Mode homepage uses a static photo-led hero, role cards, and explainer actions | Gives the calm entry page clear next steps without adding motion or changing patient routes |
 
 ## 10. Glossary
 ASHA: Accredited Social Health Activist. ANM: Auxiliary Nurse Midwife. PHC: Primary Health Centre. NER: North Eastern Region. RLS: Row Level Security. Reminiscence: activities using a person's own past (photos, songs). θ (theta): patient ability. b: item difficulty.

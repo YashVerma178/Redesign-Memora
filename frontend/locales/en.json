@@ -26,7 +26,8 @@
     "sync": "Offline & Sync",
     "settings": "Settings",
     "privacy": "Privacy & Consent",
-    "disclaimer": "Memora is a cognitive stimulation and memory companion platform, not a medical device. For health questions, consider consulting a doctor."
+    "disclaimer": "Memora is a cognitive stimulation and memory companion platform, not a medical device. For health questions, consider consulting a doctor.",
+    "switchToGallery": "Switch to Cinematic Gallery"
   },
   "Roles": {
     "selectRole": "Select Your Role",
@@ -55,7 +56,9 @@
     "chapter3Title": "Three Caring Roles",
     "chapter3Body": "A quiet space for elders, longitudinal trend insight for families, and triage support for ASHA community health workers.",
     "chapter4Title": "Private and Sovereign",
-    "chapter4Body": "No biometric audio storage. No always-on sensors. Your personal memories remain on your device."
+    "chapter4Body": "No biometric audio storage. No always-on sensors. Your personal memories remain on your device.",
+    "getStarted": "Get Started",
+    "howItWorks": "How it works"
   },
   "Play": {
     "title": "Today's Activities",
