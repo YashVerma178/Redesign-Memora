@@ -86,6 +86,28 @@
   --font-family-bengali:    "Noto Sans Bengali", "Atkinson Hyperlegible", sans-serif;
   --font-family-meetei:     "Noto Sans Meetei Mayek", "Noto Sans", sans-serif;
 
+  /* High contrast accessibility palette */
+  --hc-bg: #000000;
+  --hc-surface: #000000;
+  --hc-surface-2: #111111;
+  --hc-surface-hover: #222222;
+  --hc-ink: #ffffff;
+  --hc-ink-soft: #ffffff;
+  --hc-ink-muted: #eeeeee;
+  --hc-primary: #ffffff;
+  --hc-primary-dark: #ffffff;
+  --hc-primary-light: #222222;
+  --hc-primary-ink: #000000;
+  --hc-accent: #ffffff;
+  --hc-accent-dark: #ffffff;
+  --hc-accent-light: #222222;
+  --hc-accent-ink: #000000;
+  --hc-success: #ffffff;
+  --hc-success-light: #222222;
+  --hc-border: #ffffff;
+  --hc-border-soft: #ffffff;
+  --hc-border-focus: #ffffff;
+
   /* ── Backward-compat aliases (keep for existing code) ── */
   --canvas-bg:          var(--bg);
   --surface-card:       var(--surface);
