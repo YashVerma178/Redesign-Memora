@@ -81,19 +81,51 @@ function FramedMemory({
   position: [number, number, number];
   onSelect: () => void;
 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  const loadedTextureRef = useRef<THREE.Texture | null>(null);
+  const [photoTexture, setPhotoTexture] = useState<THREE.Texture | null>(null);
   const [hovered, setHovered] = useState(false);
 
+  useEffect(() => {
+    let isMounted = true;
+    if (!memory.imageUrl) return;
+
+    const loader = new THREE.TextureLoader();
+    loader.load(
+      memory.imageUrl,
+      (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.anisotropy = 4;
+        if (!isMounted) {
+          texture.dispose();
+          return;
+        }
+        loadedTextureRef.current = texture;
+        setPhotoTexture(texture);
+      },
+      undefined,
+      () => {
+        if (isMounted) setPhotoTexture(null);
+      }
+    );
+
+    return () => {
+      isMounted = false;
+      loadedTextureRef.current?.dispose();
+      loadedTextureRef.current = null;
+    };
+  }, [memory.imageUrl]);
+
   useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.position.y =
+    if (groupRef.current) {
+      groupRef.current.position.y =
         position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.1;
     }
   });
 
   return (
-    <mesh
-      ref={meshRef}
+    <group
+      ref={groupRef}
       position={position}
       onClick={(e) => {
         e.stopPropagation();
@@ -102,14 +134,24 @@ function FramedMemory({
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      <boxGeometry args={[2.2, 1.6, 0.1]} />
-      <meshStandardMaterial
-        color={hovered ? 0xE8A33D : 0x1F4E4B}
-        emissive={hovered ? 0xE8A33D : 0x2F6F6B}
-        emissiveIntensity={hovered ? 0.5 : 0.2}
-        roughness={0.4}
-      />
-    </mesh>
+      <mesh>
+        <boxGeometry args={[2.2, 1.6, 0.1]} />
+        <meshStandardMaterial
+          color={hovered ? 0xE8A33D : 0x1F4E4B}
+          emissive={hovered ? 0xE8A33D : 0x2F6F6B}
+          emissiveIntensity={hovered ? 0.5 : 0.2}
+          roughness={0.4}
+        />
+      </mesh>
+      <mesh position={[0, 0, 0.056]}>
+        <planeGeometry args={[1.92, 1.44]} />
+        <meshBasicMaterial
+          map={photoTexture ?? undefined}
+          color={photoTexture ? 0xFFFFFF : 0x2F6F6B}
+          toneMapped={false}
+        />
+      </mesh>
+    </group>
   );
 }
 
