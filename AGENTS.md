@@ -90,6 +90,7 @@ docker compose up --build
 - 2026-10-21 session: reviewed the tracked repository inventory (238 files), ignore rules, environment templates, CI workflow, and repository URL references. No tracked credentials found by the targeted secret-pattern scan; local `.env.local`, dependency folders, and build artifacts are ignored. Updated README clone instructions and removed stale test totals. Publishing target: `krishporwal011/Redesign-Memora` (`main`).
 - 2026-10-21 session: applied the supplied Setu dashboard as a visual reference for a bright, mobile-first layout. Restyled shared tokens and the global header while preserving Memora's self-hosted fonts, existing palette, routes, and interactions. No tests run.
 - 2026-10-21 session: fixed the 3D Memory House frames to load their local image assets as front-facing Three.js textures. Confirmed `/en/house` and a photo asset return HTTP 200; `npx tsc --noEmit` passes.
+- 2026-10-21 session: redesigned the showcase fullscreen menu with translucent blurred navigation cards and a consistent responsive grid. Existing links and menu behavior are unchanged; `npx tsc --noEmit` and local `/en` HTTP check pass.
 
 ## 9. Decision log (append only)
 | Date | Decision | Why |
@@ -126,6 +127,7 @@ docker compose up --build
 | 2026-10 | Publish this redesign checkout to `krishporwal011/Redesign-Memora` | User designated this repository as the GitHub destination |
 | 2026-10 | Use the Setu Netlify page as a visual reference for dashboard spacing and card hierarchy | Keep Memora's design tokens, fonts, content, routes, and interaction behavior intact |
 | 2026-10 | Load Memory House photo frames from local bundled image textures | Keeps photos visible in 3D while preserving offline asset delivery |
+| 2026-10 | Apply glass styling to the showcase navigation overlay using existing palette tokens | Improves scanability while keeping patient routes calm and predictable |
 
 ## 10. Glossary
 ASHA: Accredited Social Health Activist. ANM: Auxiliary Nurse Midwife. PHC: Primary Health Centre. NER: North Eastern Region. RLS: Row Level Security. Reminiscence: activities using a person's own past (photos, songs). θ (theta): patient ability. b: item difficulty.

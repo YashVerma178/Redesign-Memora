@@ -57,14 +57,16 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       aria-modal="true"
       aria-label="Navigation Menu"
       ref={dialogRef}
-      className="fixed inset-0 z-50 flex flex-col justify-between p-6 sm:p-10 transition-opacity duration-300"
+      className="glass-menu-overlay fixed inset-0 z-50 flex flex-col justify-between p-4 sm:p-6 md:p-8 transition-opacity duration-300"
       style={{
-        background: "var(--ink)",
+        background: "rgba(31, 41, 51, 0.9)",
+        backdropFilter: "blur(18px) saturate(125%)",
+        WebkitBackdropFilter: "blur(18px) saturate(125%)",
         color: "var(--bg)",
       }}
     >
       {/* ── Top Bar inside Menu ── */}
-      <div className="flex items-center justify-between border-b pb-4" style={{ borderColor: "rgba(255, 255, 255, 0.15)" }}>
+      <div className="glass-menu-toolbar flex items-center justify-between gap-3 rounded-[var(--radius-card)] border px-4 py-3 sm:px-5">
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-lg border"
@@ -90,9 +92,9 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border text-xs font-bold transition-colors cursor-pointer"
             style={{
               minHeight: "48px",
-              background: calmMode ? "var(--primary)" : "transparent",
+              background: calmMode ? "var(--primary)" : "rgba(251, 248, 243, 0.06)",
               color: "var(--bg)",
-              borderColor: "rgba(255, 255, 255, 0.3)",
+              borderColor: "rgba(251, 248, 243, 0.22)",
             }}
             aria-pressed={calmMode}
           >
@@ -104,8 +106,8 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
           <button
             type="button"
             onClick={onClose}
-            className="w-12 h-12 rounded-full border flex items-center justify-center transition-colors hover:bg-white/10 cursor-pointer"
-            style={{ borderColor: "rgba(255, 255, 255, 0.3)", color: "var(--bg)" }}
+            className="glass-menu-close w-12 h-12 rounded-full border flex items-center justify-center transition-colors cursor-pointer"
+            style={{ color: "var(--bg)" }}
             aria-label="Close menu"
           >
             <X size={26} aria-hidden="true" />
@@ -114,7 +116,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       </div>
 
       {/* ── Menu Links with Struck-Through Current Page ── */}
-      <nav className="my-auto py-8 flex flex-col gap-2 max-w-3xl">
+      <nav className="my-auto grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 gap-3 py-5 sm:py-7 overflow-y-auto" aria-label="Main navigation">
         {MENU_LINKS.map((item) => {
           const isCurrent =
             pathname === item.href ||
@@ -126,17 +128,19 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className={`group flex items-center justify-between py-2 text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight transition-transform hover:translate-x-3 no-underline ${
+              className={`glass-menu-link group flex min-h-20 items-center justify-between gap-3 rounded-[var(--radius-card)] border px-4 py-3 sm:px-5 no-underline transition-all duration-200 ${
                 isCurrent ? "line-through opacity-50" : "opacity-95 hover:opacity-100"
               }`}
               style={{ color: "var(--bg)" }}
               aria-current={isCurrent ? "page" : undefined}
             >
-              <div className="flex items-center gap-4">
-                <Icon size={28} className="opacity-75 group-hover:opacity-100 shrink-0" aria-hidden="true" />
-                <span>{item.label}</span>
+              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+                <span className="glass-menu-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-full border" aria-hidden="true">
+                  <Icon size={21} />
+                </span>
+                <span className="min-w-0 text-lg font-bold leading-tight sm:text-xl md:text-2xl">{item.label}</span>
               </div>
-              <span className="text-xs uppercase font-bold tracking-widest px-3 py-1 rounded-full border border-white/20 hidden sm:inline-block">
+              <span className="glass-menu-badge shrink-0 rounded-full border px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider sm:px-3 sm:text-[10px]">
                 {item.badge}
               </span>
             </Link>
@@ -145,7 +149,7 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       </nav>
 
       {/* ── Footer within Menu ── */}
-      <div className="pt-4 border-t flex flex-wrap items-center justify-between gap-4 text-xs opacity-75" style={{ borderColor: "rgba(255, 255, 255, 0.15)" }}>
+      <div className="glass-menu-footer flex flex-wrap items-center justify-between gap-2 rounded-[var(--radius-card)] border px-4 py-3 text-[11px] sm:px-5 sm:text-xs">
         <p>Offline-first · Zero facial tracking · DPDP Act 2023 compliant</p>
         <p>Built for North East India (SIH26003)</p>
       </div>
