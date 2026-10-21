@@ -37,7 +37,11 @@
     "preferences": "পাম্বৈশিং",
     "menuFooterPrivacy": "অফলাইন-ফার্স্ট · মখল ত্রেকিং তৌদে · DPDP আইন ২০২৩গী মতুং ইন্না",
     "menuFooterRegion": "{region}গী মনা ওইনা শেম্বা (SIH26003)",
-    "syncStatus": "সিংকগী ফিবম"
+    "syncStatus": "সিংকগী ফিবম",
+    "testVoice": "ꯍꯥꯏꯕ ꯌꯦꯡꯉꯨ",
+    "voiceSample": "ꯍꯥꯏꯕ ꯃꯇꯦꯡ ꯁꯤꯖꯅꯕꯅꯤ।",
+    "voiceUnavailable": "ꯃꯁꯤ ꯕ꯭ꯔꯥꯎꯖꯔꯗ ꯋꯥꯍꯩ ꯑꯗꯨ ꯐꯪꯗꯦ। ꯅꯪꯒꯤ ꯗꯤꯚꯥꯏꯁꯀꯤ ꯁ꯭ꯄꯤꯆ ꯁꯦꯇꯤꯡ ꯌꯦꯡꯕꯤꯌꯨ।",
+    "voicePlaying": "ꯋꯥꯍꯩ ꯑꯗꯨ ꯄꯥꯕꯥ ꯍꯧꯔꯦ।"
   },
   "Roles": {
     "selectRole": "নহাক্কী থৌদাং খনগৎলু",

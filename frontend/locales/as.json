@@ -37,7 +37,11 @@
     "preferences": "পছন্দসমূহ",
     "menuFooterPrivacy": "অফলাইন-প্ৰথম · মুখৰ অনুসৰণ নাই · DPDP আইন ২০২৩ অনুসৰি",
     "menuFooterRegion": "{region}ৰ বাবে নিৰ্মিত (SIH26003)",
-    "syncStatus": "ছিংক অৱস্থা"
+    "syncStatus": "ছিংক অৱস্থা",
+    "testVoice": "কণ্ঠ পৰীক্ষা",
+    "voiceSample": "কণ্ঠ সহায়তা সাজু।",
+    "voiceUnavailable": "এই ব্ৰাউজাৰত কথিত অডিঅ’ উপলব্ধ নহয়। আপোনাৰ ডিভাইচৰ কণ্ঠ ছেটিং পৰীক্ষা কৰক।",
+    "voicePlaying": "কণ্ঠৰ নমুনা বজোৱা হৈছে।"
   },
   "Roles": {
     "selectRole": "আপোনাৰ ভূমিকা বাছক",

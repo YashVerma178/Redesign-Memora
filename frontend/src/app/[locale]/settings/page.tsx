@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getPathname, Link, usePathname } from "@/i18n/routing";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, Globe, Type, Sun, Activity, Volume2, Check } from "lucide-react";
 import { useMemoraStore, type FontSizePreference } from "@/lib/store/useMemoraStore";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -18,7 +18,9 @@ const LOCALES = [
 
 export default function SettingsPage() {
   const locale = useLocale();
+  const t = useTranslations("Common");
   const pathname = usePathname();
+  const [voiceStatus, setVoiceStatus] = useState("");
 
   const {
     calmMode,
@@ -34,6 +36,27 @@ export default function SettingsPage() {
   const handleLanguageChange = (newLocale: (typeof LOCALES)[number]["code"]) => {
     const target = getPathname({ locale: newLocale, href: pathname });
     window.location.assign(`${target}${window.location.search}${window.location.hash}`);
+  };
+
+  useEffect(() => {
+    if (!audioAssistance) setVoiceStatus("");
+  }, [audioAssistance]);
+
+  const testVoice = () => {
+    if (!audioAssistance) return;
+    if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+      setVoiceStatus(t("voiceUnavailable"));
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(t("voiceSample"));
+    utterance.lang = ({ en: "en-IN", hi: "hi-IN", as: "as-IN", bn: "bn-IN", brx: "brx-IN", mni: "mni-IN" } as Record<string, string>)[locale] ?? "en-IN";
+    utterance.rate = 0.88;
+    utterance.onstart = () => setVoiceStatus(t("voicePlaying"));
+    utterance.onend = () => setVoiceStatus("");
+    utterance.onerror = () => setVoiceStatus(t("voiceUnavailable"));
+    window.speechSynthesis.speak(utterance);
   };
 
   return (
@@ -241,21 +264,38 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setAudioAssistance(!audioAssistance)}
-            className="px-5 py-2.5 rounded-full font-bold text-sm border transition-all active:scale-95 cursor-pointer shrink-0"
-            style={{
-              background: audioAssistance ? "var(--primary)" : "var(--surface-2)",
-              color: audioAssistance ? "var(--primary-ink)" : "var(--ink-soft)",
-              borderColor: audioAssistance ? "var(--primary-dark)" : "var(--border)",
-              minHeight: "48px",
-            }}
-            aria-pressed={audioAssistance}
-          >
-            {audioAssistance ? "Active" : "Muted"}
-          </button>
+          <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+            <button
+              type="button"
+              onClick={testVoice}
+              disabled={!audioAssistance}
+              className="px-4 py-2.5 rounded-full font-bold text-sm border transition-all active:scale-95 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+              style={{
+                background: "var(--surface-2)",
+                color: "var(--ink)",
+                borderColor: "var(--border)",
+                minHeight: "48px",
+              }}
+            >
+              {t("testVoice")}
+            </button>
+            <button
+              type="button"
+              onClick={() => setAudioAssistance(!audioAssistance)}
+              className="px-5 py-2.5 rounded-full font-bold text-sm border transition-all active:scale-95 cursor-pointer"
+              style={{
+                background: audioAssistance ? "var(--primary)" : "var(--surface-2)",
+                color: audioAssistance ? "var(--primary-ink)" : "var(--ink-soft)",
+                borderColor: audioAssistance ? "var(--primary-dark)" : "var(--border)",
+                minHeight: "48px",
+              }}
+              aria-pressed={audioAssistance}
+            >
+              {audioAssistance ? "Active" : "Muted"}
+            </button>
+          </div>
         </section>
+        {voiceStatus && <p role="status" aria-live="polite" className="text-sm" style={{ color: "var(--ink-soft)" }}>{voiceStatus}</p>}
       </div>
     </div>
   );

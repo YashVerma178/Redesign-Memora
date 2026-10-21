@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/routing";
 import { Header } from "@/components/common/Header";
 import { OfflineBanner } from "@/components/ui/OfflineBanner";
+import { AccessibilityEffects } from "@/components/common/AccessibilityEffects";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -36,6 +37,7 @@ export default async function LocaleLayout({
         style={{ background: "var(--bg)", color: "var(--ink)" }}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
+          <AccessibilityEffects />
           <Header />
           <OfflineBanner />
           <main

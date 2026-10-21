@@ -302,6 +302,61 @@ button, input, select, textarea {
   font-family: var(--font-family-meetei);
 }
 
+/* High contrast mode: monochrome surfaces keep body copy at maximum contrast. */
+:root.high-contrast {
+  --bg: #000000;
+  --surface: #000000;
+  --surface-2: #111111;
+  --surface-hover: #222222;
+  --ink: #ffffff;
+  --ink-soft: #ffffff;
+  --ink-muted: #eeeeee;
+  --primary: #ffffff;
+  --primary-dark: #ffffff;
+  --primary-light: #222222;
+  --primary-ink: #000000;
+  --accent: #ffffff;
+  --accent-dark: #ffffff;
+  --accent-light: #222222;
+  --accent-ink: #000000;
+  --success: #ffffff;
+  --success-light: #222222;
+  --border: #ffffff;
+  --border-soft: #ffffff;
+  --border-focus: #ffffff;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+}
+
+:root.high-contrast [class*="text-"] {
+  color: var(--ink) !important;
+}
+
+:root.high-contrast [class*="text-"][class*="opacity-"] {
+  opacity: 1 !important;
+}
+
+:root.high-contrast [class*="bg-white"] {
+  background-color: var(--surface) !important;
+}
+
+:root.high-contrast button,
+:root.high-contrast a,
+:root.high-contrast input,
+:root.high-contrast select,
+:root.high-contrast textarea,
+:root.high-contrast [role="dialog"] {
+  border-color: var(--border) !important;
+  outline-color: var(--border-focus);
+}
+
+:root.high-contrast :focus-visible {
+  outline: 3px solid var(--border-focus) !important;
+  outline-offset: 3px;
+}
+
 /* ── 200% zoom + long-translation safety ── */
 button, .btn-patient, .btn-primary, .btn-accent, .btn-ghost, a[role="button"] {
   white-space: normal;

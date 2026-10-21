@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Volume2, VolumeX, Sparkles } from "lucide-react";
+import { useMemoraStore } from "@/lib/store/useMemoraStore";
 
 interface PromptBubbleProps {
   message: string;
@@ -17,9 +18,14 @@ export function PromptBubble({
   onReadAloud,
 }: PromptBubbleProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const audioAssistance = useMemoraStore((state) => state.audioAssistance);
 
   const handleReadAloud = () => {
+    if (!audioAssistance) return;
     if (isPlayingAudio) {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
       setIsPlayingAudio(false);
       return;
     }
@@ -29,6 +35,7 @@ export function PromptBubble({
       onReadAloud();
     } else if (typeof window !== "undefined" && "speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = document.documentElement.lang || "en";
       utterance.rate = 0.9; // Calm, deliberate pace for older adults
       utterance.onend = () => setIsPlayingAudio(false);
       utterance.onerror = () => setIsPlayingAudio(false);
@@ -81,6 +88,7 @@ export function PromptBubble({
       <button
         type="button"
         onClick={handleReadAloud}
+        disabled={!audioAssistance}
         className="inline-flex items-center gap-2 font-bold text-base px-4 py-3 rounded-full border transition-transform active:scale-95 shrink-0 self-end md:self-center cursor-pointer"
         style={{
           background: isPlayingAudio ? "var(--accent-light)" : "var(--surface-2)",
@@ -90,6 +98,7 @@ export function PromptBubble({
           minWidth: "140px",
         }}
         aria-label={isPlayingAudio ? "Stop reading aloud" : "Read message aloud"}
+        aria-disabled={!audioAssistance}
       >
         {isPlayingAudio ? (
           <>

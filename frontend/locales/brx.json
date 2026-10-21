@@ -37,7 +37,11 @@
     "preferences": "पसायथि",
     "menuFooterPrivacy": "अफलाइन-फार्स्ट · अनुजोंखौ ट्रेक खालामनाय गैया · DPDP ऐन 2023 मावफुंनाय",
     "menuFooterRegion": "{region}नि थाखाय बानायनाय (SIH26003)",
-    "syncStatus": "सिंक थाखो"
+    "syncStatus": "सिंक थाखो",
+    "testVoice": "रावसोल थिनाइ",
+    "voiceSample": "रावसोल मदद थियार।",
+    "voiceUnavailable": "बे ब्राउजाराव रावसोल अडिअ'आ गैया। नोंथांनि डिभाइसनि रावसोल सेटिंखौ नायबिजिर।",
+    "voicePlaying": "रावसोल नमुनाखौ सोलायनाय जायो।"
   },
   "Roles": {
     "selectRole": "नोंथांनि बिबान सायख'",

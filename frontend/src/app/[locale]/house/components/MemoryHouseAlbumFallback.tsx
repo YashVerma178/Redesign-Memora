@@ -6,6 +6,7 @@ import { ArrowLeft, Box, Sparkles, Volume2, VolumeX, X, Calendar, Users, Camera 
 import { MemoryCard, type MemoryType } from "@/components/ui/MemoryCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BigButton } from "@/components/ui/BigButton";
+import { useMemoraStore } from "@/lib/store/useMemoraStore";
 
 export interface HouseMemory {
   id: string;
@@ -72,10 +73,12 @@ interface MemoryHouseAlbumFallbackProps {
 }
 
 export function MemoryHouseAlbumFallback({ reason, onRetry3D }: MemoryHouseAlbumFallbackProps) {
+  const audioAssistance = useMemoraStore((state) => state.audioAssistance);
   const [selectedMemory, setSelectedMemory] = useState<HouseMemory | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handleSpeak = (text: string) => {
+    if (!audioAssistance) return;
     if (isSpeaking) {
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
@@ -87,6 +90,7 @@ export function MemoryHouseAlbumFallback({ reason, onRetry3D }: MemoryHouseAlbum
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = document.documentElement.lang || "en";
       utterance.rate = 0.9;
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
@@ -252,6 +256,7 @@ export function MemoryHouseAlbumFallback({ reason, onRetry3D }: MemoryHouseAlbum
                 variant="primary"
                 size="large"
                 className="w-full"
+                disabled={!audioAssistance}
                 onClick={() => handleSpeak(selectedMemory.story)}
               />
 

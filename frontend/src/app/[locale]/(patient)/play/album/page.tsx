@@ -6,6 +6,7 @@ import { ArrowLeft, Volume2, VolumeX, Calendar, Users, X, Image as ImageIcon } f
 import { DayHeader } from "@/components/ui/DayHeader";
 import { MemoryCard, type MemoryType } from "@/components/ui/MemoryCard";
 import { BigButton } from "@/components/ui/BigButton";
+import { useMemoraStore } from "@/lib/store/useMemoraStore";
 
 interface PatientMemory {
   id: string;
@@ -57,10 +58,12 @@ const DEMO_APPROVED_MEMORIES: PatientMemory[] = [
 ];
 
 export default function PatientAlbumPage() {
+  const audioAssistance = useMemoraStore((state) => state.audioAssistance);
   const [selectedMemory, setSelectedMemory] = useState<PatientMemory | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handleSpeak = (text: string) => {
+    if (!audioAssistance) return;
     if (isSpeaking) {
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
@@ -72,6 +75,7 @@ export default function PatientAlbumPage() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = document.documentElement.lang || "en";
       utterance.rate = 0.88; // Calm deliberate pace
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
@@ -225,6 +229,7 @@ export default function PatientAlbumPage() {
                 icon={isSpeaking ? <VolumeX size={26} /> : <Volume2 size={26} />}
                 variant="primary"
                 size="patient"
+                disabled={!audioAssistance}
                 onClick={() => handleSpeak(selectedMemory.storyNarrative)}
               />
 

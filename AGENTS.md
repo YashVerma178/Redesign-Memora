@@ -77,7 +77,7 @@ docker compose up --build
 13. **Design system compliance.** All UI work must follow `DESIGN.md`. Do not invent new colors, sizes or components.
 
 ## 8. Current state (update every session)
-- Phase: **UI Redesign B27-B30 complete. Current follow-up: six-locale route switching and shared shell localization. Amendment A1 remains in DESIGN.md section 9.**
+- Phase: **UI Redesign B27-B30 complete. Current follow-up: accessibility preference behavior (text scale, high contrast, spoken prompts). Amendment A1 remains in DESIGN.md section 9.**
 - Done:
   - P1 Foundation: B01 (PWA plan), B02 (Frontend scaffold + tokens + Dexie + locales), B03 (FastAPI auth + RLS + consent gating + idempotent events), B04 (Anomaly detection + Monte Carlo simulation + synthetic evidence), B05 (Playwright E2E + axe a11y + CI).
   - P2 Patient Core: B06 (Patient home + Memory Match game with NER cultural pairs), B07 (Adaptive session flow + 3-consecutive-error stop rules + orientation card), B08 (Backend sync + ability recalculation + ability history endpoint), B09 (Offline sync client with batching up to 200, strict ack deletion, backoff, and reconnect auto-sync).
@@ -86,6 +86,7 @@ docker compose up --build
   - P5 Production Polish & Verification: B23 (next-intl i18n supporting en, hi, as, bn, brx, mni, script-specific Noto fonts, 30% expansion tests, and 200% text zoom readiness), B24 (Bhashini speech proxy with 3-tier fallback, zero raw audio persistence, on-demand explicit tap mic capture, and language coverage documentation), B25 (Complete safety, compliance and privacy review across all 11 criteria with zero critical issues), B26 (Final production QA, Lighthouse shell budget verification, low-end Android layout check, offline sync test, and full 4-minute demo rehearsal).
   - All 92 automated tests green (40 Vitest, 52 Pytest). Next.js compiles 26 static pages across 6 locales with zero errors.
   - Follow-up: language switching reloads the matching locale route while preserving query/hash; shared navigation menu, footer, and cinematic landing narrative/actions use locale messages across all six locale files. The normal Calm Mode landing uses the localized album view. Meitei is now labeled in Meetei Mayek in both language pickers. Locale files have matching key sets; TypeScript check and `git diff --check` pass. Some gallery memory details and secondary screens still contain hardcoded English and need localization follow-up; Bodo and Meitei strings remain pending native-speaker review.
+  - Accessibility follow-up: global root text scaling and high-contrast tokens now respond to persisted Settings; read-aloud controls honor the audio assistance preference and set the active page language; Settings provides an explicit voice sample action with an unavailable-device status. TypeScript, locale key parity, and whitespace checks pass.
 - Research status: R1 [x] R2 [ ] R3 [x] R4 [x] R5 [ ] R6 [ ] R7 [x] R8 [ ] R9 [ ] R10 [ ]  (tick when the note exists in docs/research/)
 - Known gaps: native-speaker review of Assamese/Hindi/Bengali/Bodo/Meitei strings; Bhashini credentials not yet obtained; ASR coverage per NER language unverified; legal/clinical wording not yet reviewed by a lawyer/clinician.
 - 2026-10-21 session: reviewed the tracked repository inventory (238 files), ignore rules, environment templates, CI workflow, and repository URL references. No tracked credentials found by the targeted secret-pattern scan; local `.env.local`, dependency folders, and build artifacts are ignored. Updated README clone instructions and removed stale test totals. Publishing target: `krishporwal011/Redesign-Memora` (`main`).
@@ -134,6 +135,7 @@ docker compose up --build
 | 2026-10 | New UI dependencies need a refreshed R7 note, approval and a decision-log row first | Rule 11 and solo-developer simplicity |
 | 2026-10 | Locale changes navigate to the equivalent route and shared shell copy comes from locale messages | Ensures locale changes apply consistently across routes and shared navigation |
 | 2026-10 | Show Meitei's language name in Meetei Mayek in both locale pickers | Keeps language selection readable in its own script in Calm Mode and Settings |
+| 2026-10 | Apply text scale and high contrast at the document root; gate speech playback on audio assistance | Makes persisted accessibility preferences affect all routes and patient read-aloud controls |
 | 2026-10 | Publish this redesign checkout to `krishporwal011/Redesign-Memora` | User designated this repository as the GitHub destination |
 | 2026-10 | Use the Setu Netlify page as a visual reference for dashboard spacing and card hierarchy | Keep Memora's design tokens, fonts, content, routes, and interaction behavior intact |
 | 2026-10 | Load Memory House photo frames from local bundled image textures | Keeps photos visible in 3D while preserving offline asset delivery |

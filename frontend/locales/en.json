@@ -36,7 +36,11 @@
     "preferences": "Preferences",
     "menuFooterPrivacy": "Offline-first · No facial tracking · DPDP Act 2023 compliant",
     "menuFooterRegion": "Built for {region} (SIH26003)",
-    "syncStatus": "Sync Status"
+    "syncStatus": "Sync Status",
+    "testVoice": "Test voice",
+    "voiceSample": "Voice assistance is ready.",
+    "voiceUnavailable": "Spoken audio is unavailable in this browser. Check your device speech settings.",
+    "voicePlaying": "Playing the voice sample."
   },
   "Roles": {
     "selectRole": "Select Your Role",
