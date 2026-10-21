@@ -4,14 +4,34 @@
 > Built for the **Smart India Hackathon 2026** | Problem Statement **SIH26003** (Ministry of Development of North Eastern Region — MDoNER)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Frontend Tests](https://img.shields.io/badge/Vitest-86%2F86%20Passing-brightgreen.svg)](frontend/)
-[![Backend Tests](https://img.shields.io/badge/Pytest-52%2F52%20Passing-brightgreen.svg)](backend/)
+[![Frontend Tests](https://img.shields.io/badge/Frontend-Vitest-blue.svg)](frontend/)
+[![Backend Tests](https://img.shields.io/badge/Backend-Pytest-blue.svg)](backend/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict%200%20Errors-blue.svg)](frontend/)
 [![SSG Prerender](https://img.shields.io/badge/SSG-99%20Pages%20Prerendered-success.svg)](frontend/)
 [![Languages](https://img.shields.io/badge/Languages-6%20NER%20Locales-orange.svg)](frontend/src/locales/)
 [![Offline First](https://img.shields.io/badge/PWA-Offline%20First%20(Serwist%20%2B%20Dexie)-purple.svg)](frontend/src/lib/sync.ts)
 [![Data Residency](https://img.shields.io/badge/Data%20Residency-India%20(ap--south--1)-teal.svg)](db/schema.sql)
 [![Compliance](https://img.shields.io/badge/DPDP%20Act%202023-Consent%20Gated-success.svg)](docs/DESIGN.md)
+
+## 🖥️ Memora in the Browser
+
+The screenshot below shows the Memora home page running locally in a desktop browser. It includes the site header, the memory companion introduction, and the role chooser.
+
+![Memora home page running locally at localhost:3000/en](docs/evidence/memora-localhost-home.jpg)
+
+To see it on your machine, follow the [frontend quick start](#2-run-the-frontend). Once the server starts, open **http://localhost:3000/en**.
+
+## What Memora Does
+
+Memora brings three connected experiences into one local-language, offline-first platform:
+
+| Experience | What it provides | Route |
+|---|---|---|
+| Patient | Calm memory activities, familiar photos and songs, reminders, and read-aloud support | `/[locale]/play` |
+| Caregiver | A private family memory album, activity trends, and review of suggested reminiscence questions | `/[locale]/care` |
+| ASHA / community health worker | Assigned-patient overview, explainable trend summaries, and report export | `/[locale]/asha` |
+
+The showcase home page links to these experiences and the interactive Memory House. The patient activity screens remain simple and predictable. Calm Mode reduces motion and uses the static album presentation. Memora supports English, Hindi, Assamese, Bengali, Bodo, and Meitei. It offers cognitive stimulation and caregiver support; it is not a diagnostic tool or medical device.
 
 ---
 
@@ -285,19 +305,20 @@ git clone https://github.com/krishporwal011/Redesign-Memora.git
 cd Redesign-Memora
 ```
 
-### 2. Frontend Setup
+### 2. Run the Frontend
 ```bash
 cd frontend
 npm install
 
-# Start the frontend development server
+# Start the Next.js development server
 npm run dev
 ```
-The application will be live at: **`http://localhost:3000`**
+Open **http://localhost:3000/en** for the English home page. Other locale routes use `/hi`, `/as`, `/bn`, `/brx`, and `/mni` in place of `/en`.
 
-### 3. Backend Setup
+### 3. Run the Backend (Optional)
+The frontend can be explored on its own. To run the FastAPI service too, open a second terminal from the repository root and run:
 ```bash
-cd ../backend
+cd backend
 
 # Create and activate Python virtual environment
 python3 -m venv .venv
@@ -309,7 +330,7 @@ pip install -r requirements.txt
 # Start the FastAPI server
 uvicorn app.main:app --reload --port 8000
 ```
-API Documentation (Swagger UI) is available at: **`http://localhost:8000/docs`**
+API documentation is available at **http://localhost:8000/docs**. Some connected features require local service credentials; use the provided environment templates and keep secret values out of Git.
 
 ### 4. Running with Docker Compose
 To run the full stack locally with a single command:
