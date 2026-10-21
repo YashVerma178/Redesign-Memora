@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import {
   Sparkles,
@@ -94,6 +95,9 @@ const HERO_CULTURAL_ITEMS = [
 ];
 
 export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
+  const t = useTranslations("Landing");
+  const tCommon = useTranslations("Common");
+  const tRoles = useTranslations("Roles");
   const { calmMode, toggleCalmMode } = useMemoraStore();
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [isFinePointer, setIsFinePointer] = useState(false);
@@ -155,9 +159,9 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
             color: "var(--primary-ink)",
             minHeight: "44px",
           }}
-          aria-label="Jump directly to role cards"
+          aria-label={t("chooseRole")}
         >
-          Choose Role
+          {t("chooseRole")}
         </button>
 
         <button
@@ -170,10 +174,10 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
             color: "var(--bg)",
             minHeight: "44px",
           }}
-          aria-label="Switch to Album Mode"
+          aria-label={tCommon("albumMode")}
         >
           <BookOpen size={14} aria-hidden="true" />
-          <span className="hidden sm:inline">Album Mode</span>
+          <span className="hidden sm:inline">{tCommon("albumMode")}</span>
         </button>
 
         <button
@@ -187,10 +191,10 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
             minHeight: "44px",
           }}
           aria-pressed={calmMode}
-          aria-label={`Calm mode: ${calmMode ? "On" : "Off"}`}
+          aria-label={calmMode ? tCommon("calmModeOn") : tCommon("calmModeOff")}
         >
           <Activity size={14} aria-hidden="true" />
-          <span>{calmMode ? "Calm On" : "Calm"}</span>
+          <span>{calmMode ? tCommon("calmModeOn") : tCommon("calmMode")}</span>
         </button>
       </aside>
 
@@ -233,22 +237,21 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
             }}
           >
             <Sparkles size={14} aria-hidden="true" />
-            <span>Chapter I · Cognitive Stimulation & Reminiscence</span>
+            <span>{t("chapter1Title")}</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight">
-            Memories are fragile.{" "}
-            <span style={{ color: "var(--accent)" }}>Connection is not.</span>
+            {t("tagline")}
           </h1>
 
           <p className="text-base sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto opacity-90">
-            For elders living with age-related memory difficulties in North East India, dignity begins with familiar faces, local languages, and cultural memories that stay close.
+            {t("heroDesc")}
           </p>
 
           {/* Interactive Cultural Anchor Ribbon */}
           <div className="pt-2 pb-4">
             <span className="text-xs font-semibold uppercase tracking-wider block mb-3 opacity-75">
-              Grounded in North Eastern India Cultural Folklore
+              {t("trust3")}
             </span>
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               {HERO_CULTURAL_ITEMS.map((item) => (
@@ -282,7 +285,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
                 minHeight: "56px",
               }}
             >
-              <span>Explore 3 Care Roles</span>
+              <span>{t("chooseRole")}</span>
               <ArrowRight size={18} aria-hidden="true" />
             </button>
 
@@ -296,7 +299,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
                 minHeight: "48px",
               }}
             >
-              <span>Interactive Memory Vault</span>
+              <span>{t("chapter2Title")}</span>
               <ChevronDown size={16} aria-hidden="true" />
             </button>
           </div>
@@ -316,13 +319,13 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
               className="text-xs font-bold uppercase tracking-wider block"
               style={{ color: "var(--accent)" }}
             >
-              Chapter II · Authentic Reminiscence
+              {t("chapter2Title")}
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-              A familiar song. A courtyard photo. A woven gamosa.
+              {t("chapter2Title")}
             </h2>
             <p className="text-base md:text-lg leading-relaxed opacity-85">
-              Generic memory games feel like hospital tests. Memora uses family-uploaded photos, grandmother's Borgeet prayers, and childhood harvest stories as the stimulation activities.
+              {t("chapter2Body")}
             </p>
 
             {/* Interactive Memory Thumbnails Selector */}
@@ -472,13 +475,13 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
             className="text-xs font-bold uppercase tracking-wider block"
             style={{ color: "var(--accent)" }}
           >
-            Chapter III · Connected Ecosystem
+              {t("chapter3Title")}
           </span>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight">
-            Three roles. One circle of care.
+            {t("chooseRole")}
           </h2>
           <p className="text-base md:text-lg opacity-85">
-            Choose your portal below to enter the live experience.
+            {tRoles("selectRole")}
           </p>
         </div>
 
@@ -520,7 +523,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
                     <Flower2 size={20} />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white drop-shadow">
-                    Older Adult & Elder
+                    {tRoles("patientTitle")}
                   </h3>
                 </div>
               </div>
@@ -528,7 +531,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
               {/* Card Body & Feature Highlights */}
               <div className="p-6 space-y-4">
                 <p className="text-sm leading-relaxed opacity-85">
-                  5–10 minutes of calm memory match and reminiscence activities. 64px touch targets, zero timers, zero patronizing praise.
+                  {tRoles("patientSubtitle")}
                 </p>
 
                 <div className="space-y-2 pt-2 border-t border-white/10 text-xs">
@@ -593,7 +596,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
                     <Heart size={20} />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white drop-shadow">
-                    Family & Caregiver
+                    {tRoles("caregiverTitle")}
                   </h3>
                 </div>
               </div>
@@ -601,7 +604,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
               {/* Card Body & Feature Highlights */}
               <div className="p-6 space-y-4">
                 <p className="text-sm leading-relaxed opacity-85">
-                  Upload photos and songs into the private vault, approve AI quiz questions, and observe 14-day longitudinal trend curves with statistical evidence.
+                  {tRoles("caregiverSubtitle")}
                 </p>
 
                 <div className="space-y-2 pt-2 border-t border-white/10 text-xs">
@@ -666,7 +669,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
                     <Eye size={20} />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white drop-shadow">
-                    ASHA Health Worker
+                    {tRoles("ashaTitle")}
                   </h3>
                 </div>
               </div>
@@ -674,7 +677,7 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
               {/* Card Body & Feature Highlights */}
               <div className="p-6 space-y-4">
                 <p className="text-sm leading-relaxed opacity-85">
-                  Monitor 20–30 community households. Ordered by triage priority with robust z-score, CUSUM drift detection, and pure-Python PDF export.
+                  {tRoles("ashaSubtitle")}
                 </p>
 
                 <div className="space-y-2 pt-2 border-t border-white/10 text-xs">
@@ -713,32 +716,32 @@ export function LandingGalleryView({ onToggleAlbum }: LandingGalleryViewProps) {
           className="text-xs font-bold uppercase tracking-wider block"
           style={{ color: "var(--accent)" }}
         >
-          Chapter IV · Trust & Integrity
+          {t("chapter4Title")}
         </span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-          Built for the North Eastern Region of India
+          {t("trust3")}
         </h2>
         <p className="text-base md:text-lg max-w-xl mx-auto opacity-85">
-          SIH26003. Strict data minimization. Zero facial emotion recognition. Zero raw audio persistence.
+          {t("chapter4Body")}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 text-left">
           <div className="p-5 rounded-[var(--radius-md)] border border-white/10 bg-white/5 space-y-2">
             <ShieldCheck size={24} style={{ color: "var(--success)" }} />
-            <h4 className="font-bold text-base">DPDP Act 2023 Compliant</h4>
-            <p className="text-xs opacity-75">All patient data stays within India (Mumbai region) with strict guardian consent gating.</p>
+            <h4 className="font-bold text-base">{t("trust2")}</h4>
+            <p className="text-xs opacity-75">{t("trust2Desc")}</p>
           </div>
 
           <div className="p-5 rounded-[var(--radius-md)] border border-white/10 bg-white/5 space-y-2">
             <WifiOff size={24} style={{ color: "var(--primary-light)" }} />
-            <h4 className="font-bold text-base">Offline-First PWA</h4>
-            <p className="text-xs opacity-75">IndexedDB client queue with idempotent UUIDv7 events. Never stops when network drops.</p>
+            <h4 className="font-bold text-base">{t("trust1")}</h4>
+            <p className="text-xs opacity-75">{t("trust1Desc")}</p>
           </div>
 
           <div className="p-5 rounded-[var(--radius-md)] border border-white/10 bg-white/5 space-y-2">
             <Languages size={24} style={{ color: "var(--accent)" }} />
-            <h4 className="font-bold text-base">6 Regional Languages</h4>
-            <p className="text-xs opacity-75">English, Hindi, Assamese, Bengali, Bodo, and Manipuri with regional Noto script fonts.</p>
+            <h4 className="font-bold text-base">{t("trust3")}</h4>
+            <p className="text-xs opacity-75">{t("heroDesc")}</p>
           </div>
         </div>
       </section>
