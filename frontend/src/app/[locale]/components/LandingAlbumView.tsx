@@ -127,7 +127,7 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
             </div>
           </div>
 
-          <div className="relative min-h-[300px] overflow-hidden rounded-[var(--radius-card)] border shadow-sm sm:min-h-[390px] lg:min-h-[450px]" style={{ borderColor: "var(--border-soft)" }}>
+          <div className="relative min-h-[300px] overflow-hidden rounded-[var(--radius-card)] border-2 shadow-sm sm:min-h-[390px] lg:min-h-[450px]" style={{ borderColor: "var(--border)" }}>
             <Image
               src={photos.elder}
               alt=""
@@ -179,8 +179,8 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
                 <Link
                   key={role.href}
                   href={role.href}
-                  className="group flex min-h-full flex-col overflow-hidden rounded-[var(--radius-card)] border p-3 no-underline shadow-sm transition-shadow hover:shadow-md"
-                  style={{ background: "var(--bg)", borderColor: "var(--border-soft)" }}
+                  className="group flex min-h-full flex-col overflow-hidden rounded-[var(--radius-card)] border-2 p-3 no-underline shadow-sm transition-shadow hover:shadow-md"
+                  style={{ background: "var(--bg)", borderColor: "var(--border)" }}
                 >
                   <div className="relative h-48 overflow-hidden rounded-[var(--radius-md)] sm:h-56">
                     <Image
@@ -219,20 +219,20 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
             <h2 id="how-heading" className="text-3xl font-extrabold sm:text-4xl" style={{ color: "var(--ink)" }}>{t("howItWorks")}</h2>
           </div>
 
-          <div className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-card)] border md:grid-cols-3" style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
+          <div className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-card)] border-2 md:grid-cols-3" style={{ background: "var(--surface)", borderColor: "var(--primary)" }}>
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
                 <article
                   key={step.title}
-                  className={`p-5 sm:p-7 ${index < steps.length - 1 ? "border-b md:border-b-0 md:border-r" : ""}`}
-                  style={{ borderColor: "var(--border)" }}
+                  className={`p-5 sm:p-7 ${index < steps.length - 1 ? "border-b-2 md:border-b-0 md:border-r-2" : ""}`}
+                  style={{ borderColor: "var(--primary)" }}
                 >
                   <div className="mb-4 flex items-center justify-between">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl" style={{ background: "var(--primary-light)", color: "var(--primary)" }}>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl border" style={{ background: "var(--primary-light)", borderColor: "var(--primary)", color: "var(--primary)" }}>
                       <Icon size={23} aria-hidden="true" />
                     </span>
-                    <span className="text-sm font-bold" style={{ color: "var(--ink-muted)" }}>0{index + 1}</span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border text-sm font-extrabold" style={{ background: "var(--primary-light)", borderColor: "var(--primary)", color: "var(--primary-dark)" }}>0{index + 1}</span>
                   </div>
                   <h3 className="text-lg font-extrabold" style={{ color: "var(--ink)" }}>{step.title}</h3>
                   <p className="mt-2 text-base leading-7 sm:text-lg" style={{ color: "var(--ink-soft)" }}>{step.description}</p>
@@ -251,7 +251,7 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
       </section>
 
       <section aria-label={t("chooseRole")} className="px-4 pb-8 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-3 rounded-[var(--radius-card)] border p-4 sm:grid-cols-3 sm:p-5" style={{ background: "var(--surface)", borderColor: "var(--border-soft)" }}>
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-3 rounded-[var(--radius-card)] border-2 p-4 sm:grid-cols-3 sm:p-5" style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
           {trustPoints.map((point) => {
             const Icon = point.icon;
             return (
