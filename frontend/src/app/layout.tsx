@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     "An offline-first, local-language cognitive-stimulation and memory-companion platform for elderly people in North Eastern India.",
   manifest: "/manifest.json",
   icons: {
-    icon: "/icons/icon-192x192.svg",
-    apple: "/icons/icon-192x192.svg",
+    icon: "/icons/6DE0315E-FC3B-4C8D-BE04-76F73846572E.png",
+    apple: "/icons/6DE0315E-FC3B-4C8D-BE04-76F73846572E.png",
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { Menu, Activity, Globe, ChevronDown } from "lucide-react";
@@ -69,17 +70,14 @@ export function Header() {
             className="flex items-center gap-3 no-underline shrink-0"
             aria-label="Memora — home"
           >
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-base md:text-lg shrink-0 border-2"
-              style={{
-                background: "var(--accent)",
-                color: "var(--accent-ink)",
-                borderColor: "var(--accent-light)",
-              }}
-              aria-hidden="true"
-            >
-              M
-            </div>
+            <Image
+              src="/icons/6DE0315E-FC3B-4C8D-BE04-76F73846572E.png"
+              alt=""
+              width={48}
+              height={48}
+              priority
+              className="h-10 w-10 shrink-0 rounded-full border-2 border-[var(--accent-light)] object-cover"
+            />
             <div>
               <span
                 className="text-lg md:text-xl font-extrabold tracking-tight leading-none block"

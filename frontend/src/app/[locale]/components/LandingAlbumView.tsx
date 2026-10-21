@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Flower2, Home as HomeIcon, Stethoscope, ArrowRight, ShieldCheck, WifiOff, Languages, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -26,17 +27,14 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
       >
         <div className="relative max-w-2xl mx-auto space-y-2">
           {/* Logo Mark */}
-          <div
-            className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl font-extrabold mx-auto border-2 shadow-sm"
-            style={{
-              background: "var(--accent)",
-              color: "var(--accent-ink)",
-              borderColor: "var(--accent-light)",
-            }}
-            aria-hidden="true"
-          >
-            M
-          </div>
+          <Image
+            src="/icons/6DE0315E-FC3B-4C8D-BE04-76F73846572E.png"
+            alt="Memora logo"
+            width={72}
+            height={72}
+            priority
+            className="mx-auto h-12 w-12 rounded-full border-2 border-[var(--accent-light)] object-cover shadow-sm md:h-14 md:w-14"
+          />
 
           <h1
             id="hero-heading"

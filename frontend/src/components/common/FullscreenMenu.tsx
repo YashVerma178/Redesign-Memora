@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import { Link, usePathname } from "@/i18n/routing";
 import { X, Sparkles, Heart, Activity, ShieldCheck, Home, Eye, Wifi, Settings, Box } from "lucide-react";
 import { useMemoraStore } from "@/lib/store/useMemoraStore";
@@ -68,16 +69,13 @@ export function FullscreenMenu({ isOpen, onClose }: FullscreenMenuProps) {
       {/* ── Top Bar inside Menu ── */}
       <div className="glass-menu-toolbar flex items-center justify-between gap-3 rounded-[var(--radius-card)] border px-4 py-3 sm:px-5">
         <div className="flex items-center gap-3">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-lg border"
-            style={{
-              background: "var(--accent)",
-              color: "var(--accent-ink)",
-              borderColor: "var(--accent-light)",
-            }}
-          >
-            M
-          </div>
+          <Image
+            src="/icons/6DE0315E-FC3B-4C8D-BE04-76F73846572E.png"
+            alt=""
+            width={48}
+            height={48}
+            className="h-10 w-10 shrink-0 rounded-full border border-[var(--accent-light)] object-cover"
+          />
           <div>
             <span className="text-xl font-bold tracking-tight block">Memora</span>
             <span className="text-xs uppercase tracking-wider block opacity-75">North East India</span>
