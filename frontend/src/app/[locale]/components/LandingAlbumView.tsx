@@ -219,11 +219,15 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
             <h2 id="how-heading" className="text-3xl font-extrabold sm:text-4xl" style={{ color: "var(--ink)" }}>{t("howItWorks")}</h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
+          <div className="grid grid-cols-1 overflow-hidden rounded-[var(--radius-card)] border md:grid-cols-3" style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <article key={step.title} className="rounded-[var(--radius-card)] border p-5 sm:p-6" style={{ background: "var(--surface)", borderColor: "var(--border-soft)" }}>
+                <article
+                  key={step.title}
+                  className={`p-5 sm:p-7 ${index < steps.length - 1 ? "border-b md:border-b-0 md:border-r" : ""}`}
+                  style={{ borderColor: "var(--border)" }}
+                >
                   <div className="mb-4 flex items-center justify-between">
                     <span className="flex h-12 w-12 items-center justify-center rounded-2xl" style={{ background: "var(--primary-light)", color: "var(--primary)" }}>
                       <Icon size={23} aria-hidden="true" />
@@ -238,7 +242,7 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
           </div>
 
           <div className="mt-8 flex justify-center">
-            <a href="#roles-section" className="inline-flex min-h-12 items-center gap-2 rounded-full border px-5 text-sm font-bold no-underline transition-colors hover:bg-[var(--surface)]" style={{ color: "var(--primary)", borderColor: "var(--primary)" }}>
+            <a href="#roles-section" className="inline-flex min-h-14 items-center gap-3 rounded-full px-7 text-base font-bold no-underline shadow-sm transition-colors hover:brightness-95" style={{ background: "var(--primary)", color: "var(--primary-ink)" }}>
               <span>{t("getStarted")}</span>
               <ArrowRight size={18} aria-hidden="true" />
             </a>
