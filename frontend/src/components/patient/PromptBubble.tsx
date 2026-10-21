@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Volume2, VolumeX, Sparkles } from "lucide-react";
 import { useMemoraStore } from "@/lib/store/useMemoraStore";
+import { getSpeechLanguageTag } from "@/lib/accessibility-speech";
 
 interface PromptBubbleProps {
   message: string;
@@ -19,6 +20,7 @@ export function PromptBubble({
 }: PromptBubbleProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const audioAssistance = useMemoraStore((state) => state.audioAssistance);
+  const voiceLanguage = useMemoraStore((state) => state.voiceLanguage);
 
   const handleReadAloud = () => {
     if (!audioAssistance) return;
@@ -35,7 +37,7 @@ export function PromptBubble({
       onReadAloud();
     } else if (typeof window !== "undefined" && "speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(message);
-      utterance.lang = document.documentElement.lang || "en";
+      utterance.lang = getSpeechLanguageTag(voiceLanguage, document.documentElement.lang || "en");
       utterance.rate = 0.9; // Calm, deliberate pace for older adults
       utterance.onend = () => setIsPlayingAudio(false);
       utterance.onerror = () => setIsPlayingAudio(false);

@@ -5,6 +5,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 export type DisplayMode = "gallery" | "album";
 export type FontSizePreference = "medium" | "large" | "xlarge";
+export type VoiceLanguage = "auto" | "en" | "hi" | "as" | "bn" | "brx" | "mni";
 
 export interface MemoraState {
   calmMode: boolean;
@@ -12,12 +13,15 @@ export interface MemoraState {
   fontSize: FontSizePreference;
   highContrast: boolean;
   audioAssistance: boolean;
+  voiceLanguage: VoiceLanguage;
   toggleCalmMode: () => void;
   setCalmMode: (calm: boolean) => void;
   setDisplayMode: (mode: DisplayMode) => void;
   setFontSize: (size: FontSizePreference) => void;
   setHighContrast: (high: boolean) => void;
   setAudioAssistance: (audio: boolean) => void;
+  setVoiceLanguage: (language: VoiceLanguage) => void;
+  resetPreferences: () => void;
 }
 
 function getInitialCalmMode(): boolean {
@@ -45,6 +49,7 @@ export const useMemoraStore = create<MemoraState>()(
       fontSize: "medium",
       highContrast: false,
       audioAssistance: true,
+      voiceLanguage: "auto",
 
       toggleCalmMode: () =>
         set((state) => {
@@ -70,6 +75,18 @@ export const useMemoraStore = create<MemoraState>()(
       setFontSize: (fontSize: FontSizePreference) => set({ fontSize }),
       setHighContrast: (highContrast: boolean) => set({ highContrast }),
       setAudioAssistance: (audioAssistance: boolean) => set({ audioAssistance }),
+      setVoiceLanguage: (voiceLanguage: VoiceLanguage) => set({ voiceLanguage }),
+      resetPreferences: () => {
+        const calmMode = getInitialCalmMode();
+        set({
+          calmMode,
+          displayMode: calmMode ? "album" : "gallery",
+          fontSize: "medium",
+          highContrast: false,
+          audioAssistance: true,
+          voiceLanguage: "auto",
+        });
+      },
     }),
     {
       name: "memora-user-preferences",

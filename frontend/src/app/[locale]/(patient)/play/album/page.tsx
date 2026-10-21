@@ -7,6 +7,7 @@ import { DayHeader } from "@/components/ui/DayHeader";
 import { MemoryCard, type MemoryType } from "@/components/ui/MemoryCard";
 import { BigButton } from "@/components/ui/BigButton";
 import { useMemoraStore } from "@/lib/store/useMemoraStore";
+import { getSpeechLanguageTag } from "@/lib/accessibility-speech";
 
 interface PatientMemory {
   id: string;
@@ -59,6 +60,7 @@ const DEMO_APPROVED_MEMORIES: PatientMemory[] = [
 
 export default function PatientAlbumPage() {
   const audioAssistance = useMemoraStore((state) => state.audioAssistance);
+  const voiceLanguage = useMemoraStore((state) => state.voiceLanguage);
   const [selectedMemory, setSelectedMemory] = useState<PatientMemory | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
@@ -75,7 +77,7 @@ export default function PatientAlbumPage() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = document.documentElement.lang || "en";
+      utterance.lang = getSpeechLanguageTag(voiceLanguage, document.documentElement.lang || "en");
       utterance.rate = 0.88; // Calm deliberate pace
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);

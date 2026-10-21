@@ -7,6 +7,7 @@ import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Volume2, VolumeX, X, Calenda
 import { HOUSE_MEMORIES, type HouseMemory } from "./MemoryHouseAlbumFallback";
 import { BigButton } from "@/components/ui/BigButton";
 import { useMemoraStore } from "@/lib/store/useMemoraStore";
+import { getSpeechLanguageTag } from "@/lib/accessibility-speech";
 
 interface MemoryHouseSceneProps {
   onFpsDrop: () => void;
@@ -229,6 +230,7 @@ function SceneController({
 
 export function MemoryHouseScene({ onFpsDrop, onExit }: MemoryHouseSceneProps) {
   const audioAssistance = useMemoraStore((state) => state.audioAssistance);
+  const voiceLanguage = useMemoraStore((state) => state.voiceLanguage);
   const [cameraPos, setCameraPos] = useState({ x: 0, y: 0.5, z: 4 });
   const [selectedMemory, setSelectedMemory] = useState<HouseMemory | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -269,7 +271,7 @@ export function MemoryHouseScene({ onFpsDrop, onExit }: MemoryHouseSceneProps) {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = document.documentElement.lang || "en";
+      utterance.lang = getSpeechLanguageTag(voiceLanguage, document.documentElement.lang || "en");
       utterance.rate = 0.9;
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
