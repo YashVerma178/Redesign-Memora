@@ -281,8 +281,8 @@ Memora supports **6 regional languages** across North East India with 100% key p
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/krishporwal011/Memora-HealthCare.git
-cd Memora-HealthCare
+git clone https://github.com/krishporwal011/Redesign-Memora.git
+cd Redesign-Memora
 ```
 
 ### 2. Frontend Setup
@@ -321,10 +321,10 @@ docker compose up --build
 
 ## 🧪 Testing & Quality Verification
 
-Memora maintains a **100% green testing pipeline** across both frontend and backend suites:
+Automated tests cover the frontend and backend. Run the project checks locally with:
 
 ```bash
-# 1. Run Frontend Vitest Suite (86 tests)
+# 1. Run Frontend Vitest Suite
 cd frontend
 npm test
 
@@ -334,16 +334,15 @@ npx tsc --noEmit
 # 3. Test Production Static Build (99 SSG Pages)
 npm run build
 
-# 4. Run Backend Pytest Suite (52 tests)
+# 4. Run Backend Pytest Suite
 cd ../backend
 source .venv/bin/activate
 pytest -q
 ```
 
-### Summary of Test Suites
-- **86 Vitest Tests**: Component rendering, patient 64px tap bounds, offline Dexie queue sync, IRT adaptive calibration, i18n locale completeness, and 3D memory house fallback triggers.
-- **52 Pytest Tests**: FastAPI authentication, RLS multi-tenant isolation, DPDP consent gating, idempotent batch ingestion, robust MAD Z-score / CUSUM drift detection, and PDF generation.
-- **Total**: **138 automated tests passing**.
+### Test Coverage
+- **Frontend**: Component rendering, patient touch targets, offline queue sync, adaptive calibration, locale completeness, and memory house fallback behavior.
+- **Backend**: FastAPI authentication, consent gating, idempotent event ingestion, anomaly detection, and PDF generation.
 
 ---
 
@@ -372,7 +371,7 @@ pytest -q
 ## 📂 Repository Structure
 
 ```text
-Memora-HealthCare/
+Redesign-Memora/
 ├── README.md                 # Master project documentation
 ├── AGENTS.md                 # AI agent memory, instructions, and rules
 ├── DESIGN.md                 # UI/UX design tokens and Amendment A1 spec

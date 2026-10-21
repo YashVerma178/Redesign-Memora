@@ -87,6 +87,7 @@ docker compose up --build
   - All 92 automated tests green (40 Vitest, 52 Pytest). Next.js compiles 26 static pages across 6 locales with zero errors.
 - Research status: R1 [x] R2 [ ] R3 [x] R4 [x] R5 [ ] R6 [ ] R7 [x] R8 [ ] R9 [ ] R10 [ ]  (tick when the note exists in docs/research/)
 - Known gaps: native-speaker review of Assamese/Hindi/Bengali/Bodo/Meitei strings; Bhashini credentials not yet obtained; ASR coverage per NER language unverified; legal/clinical wording not yet reviewed by a lawyer/clinician.
+- 2026-10-21 session: reviewed the tracked repository inventory (238 files), ignore rules, environment templates, CI workflow, and repository URL references. No tracked credentials found by the targeted secret-pattern scan; local `.env.local`, dependency folders, and build artifacts are ignored. Updated README clone instructions and removed stale test totals. Publishing target: `krishporwal011/Redesign-Memora` (`main`).
 
 ## 9. Decision log (append only)
 | Date | Decision | Why |
@@ -120,6 +121,7 @@ docker compose up --build
 | 2026-10 | Self-host all fonts and bundle all 3D assets; no CDN at runtime | Offline-first rule 03; Google Fonts import breaks offline |
 | 2026-10 | Evidence numbers kept but shown under a "Show the numbers" disclosure after a plain-language summary | Rule 7 (explainable AI) plus a calmer caregiver UI |
 | 2026-10 | New UI dependencies need a refreshed R7 note, approval and a decision-log row first | Rule 11 and solo-developer simplicity |
+| 2026-10 | Publish this redesign checkout to `krishporwal011/Redesign-Memora` | User designated this repository as the GitHub destination |
 
 ## 10. Glossary
 ASHA: Accredited Social Health Activist. ANM: Auxiliary Nurse Midwife. PHC: Primary Health Centre. NER: North Eastern Region. RLS: Row Level Security. Reminiscence: activities using a person's own past (photos, songs). θ (theta): patient ability. b: item difficulty.
