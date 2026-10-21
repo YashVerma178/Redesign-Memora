@@ -51,14 +51,14 @@ export const useMemoraStore = create<MemoraState>()(
           const nextCalm = !state.calmMode;
           return {
             calmMode: nextCalm,
-            displayMode: nextCalm ? "album" : state.displayMode,
+            displayMode: nextCalm ? "album" : "gallery",
           };
         }),
 
       setCalmMode: (calm: boolean) =>
-        set((state) => ({
+        set(() => ({
           calmMode: calm,
-          displayMode: calm ? "album" : state.displayMode,
+          displayMode: calm ? "album" : "gallery",
         })),
 
       setDisplayMode: (mode: DisplayMode) =>

@@ -93,6 +93,7 @@ docker compose up --build
 - 2026-10-21 session: redesigned the showcase fullscreen menu with translucent blurred navigation cards and a consistent responsive grid. Existing links and menu behavior are unchanged; `npx tsc --noEmit` and local `/en` HTTP check pass.
 - 2026-10-21 session: replaced the header's always-visible locale row with one localized Language button and an accessible dropdown listing all six supported languages. Locale routing remains unchanged; `npx tsc --noEmit` and `git diff --check` pass.
 - 2026-10-21 session: used the provided Memora logo PNG for the header, home hero, fullscreen menu, browser icons, and PWA manifest. The PWA manifest references the PNG as an unrestricted icon source to match its actual image dimensions.
+- 2026-10-21 session: fixed Calm mode transitions so ON selects the light Album presentation and OFF returns to the dark Cinematic Gallery. The explicit Gallery switch remains available from Album; `npx tsc --noEmit` and `git diff --check` pass.
 
 ## 9. Decision log (append only)
 | Date | Decision | Why |
@@ -132,6 +133,7 @@ docker compose up --build
 | 2026-10 | Apply glass styling to the showcase navigation overlay using existing palette tokens | Improves scanability while keeping patient routes calm and predictable |
 | 2026-10 | Show one localized Language control in the header and reveal locale choices on click | Reduces header clutter while keeping all six locales easy to find |
 | 2026-10 | Use the supplied Memora logo PNG for brand marks and app icons | Keeps the product identity consistent across the web app and installed PWA |
+| 2026-10 | Calm mode ON selects Album; turning it OFF restores Cinematic Gallery | Makes the global Calm toggle produce a clear, reversible light/dark presentation change |
 
 ## 10. Glossary
 ASHA: Accredited Social Health Activist. ANM: Auxiliary Nurse Midwife. PHC: Primary Health Centre. NER: North Eastern Region. RLS: Row Level Security. Reminiscence: activities using a person's own past (photos, songs). θ (theta): patient ability. b: item difficulty.
