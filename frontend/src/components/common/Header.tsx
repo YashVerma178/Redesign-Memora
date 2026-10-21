@@ -23,6 +23,7 @@ export function Header() {
   const router = useRouter();
   const { calmMode, toggleCalmMode } = useMemoraStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isPatientRoute = pathname.includes("/play");
 
   const handleLocaleChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });
