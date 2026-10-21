@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
-import { Menu, Activity, Globe } from "lucide-react";
+import { Menu, Activity, Globe, ChevronDown } from "lucide-react";
 import { useMemoraStore } from "@/lib/store/useMemoraStore";
 import { FullscreenMenu } from "./FullscreenMenu";
 
@@ -23,11 +23,34 @@ export function Header() {
   const router = useRouter();
   const { calmMode, toggleCalmMode } = useMemoraStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
   const isPatientRoute = pathname.includes("/play");
 
   const handleLocaleChange = (newLocale: string) => {
+    setIsLanguageMenuOpen(false);
     router.replace(pathname, { locale: newLocale });
   };
+
+  useEffect(() => {
+    if (!isLanguageMenuOpen) return;
+
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (!languageMenuRef.current?.contains(event.target as Node)) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsLanguageMenuOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isLanguageMenuOpen]);
 
   return (
     <>
@@ -76,69 +99,58 @@ export function Header() {
           {/* ── Controls (Language + Calm Toggle + Menu) ── */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Language Switcher — 48px touch targets */}
-            <nav aria-label="Language selection" className="flex items-center">
-              {/* Mobile compact select (min 48px height) */}
-              <div className="sm:hidden relative flex items-center">
-                <label className="sr-only" htmlFor="lang-select">Choose language</label>
-                <div className="flex items-center gap-1.5 px-3 rounded-full border"
+            <nav aria-label={t("language")} className="flex items-center">
+              <div className="relative" ref={languageMenuRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsLanguageMenuOpen((open) => !open)}
+                  className="inline-flex min-h-12 items-center gap-2 rounded-full border px-3 sm:px-4 text-xs sm:text-sm font-bold transition-colors hover:bg-white/10 cursor-pointer"
                   style={{
                     background: "var(--primary)",
                     borderColor: "var(--primary-light)",
-                    minHeight: "48px",
+                    color: "var(--primary-ink)",
                   }}
+                  aria-haspopup="menu"
+                  aria-expanded={isLanguageMenuOpen}
+                  aria-controls="language-options"
                 >
-                  <Globe size={16} style={{ color: "var(--primary-ink)" }} aria-hidden="true" />
-                  <select
-                    id="lang-select"
-                    className="text-xs font-bold bg-transparent outline-none cursor-pointer"
-                    style={{ color: "var(--primary-ink)" }}
-                    value={locale}
-                    onChange={(e) => handleLocaleChange(e.target.value)}
-                  >
-                    {LOCALES.map((loc) => (
-                      <option
-                        key={loc.code}
-                        value={loc.code}
-                        style={{ background: "var(--surface)", color: "var(--ink)" }}
-                      >
-                        {loc.full}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+                  <Globe size={17} aria-hidden="true" />
+                  <span>{t("language")}</span>
+                  <ChevronDown size={15} aria-hidden="true" />
+                </button>
 
-              {/* Tablet+ pill buttons with min 48px touch target */}
-              <div
-                className="hidden sm:flex items-center gap-1 p-1 rounded-full border"
-                style={{
-                  background: "var(--primary)",
-                  borderColor: "rgba(255, 255, 255, 0.15)",
-                }}
-              >
-                {LOCALES.map((loc) => {
-                  const isActive = locale === loc.code;
-                  return (
-                    <button
-                      key={loc.code}
-                      type="button"
-                      onClick={() => handleLocaleChange(loc.code)}
-                      className={`px-3 font-bold rounded-full transition-all cursor-pointer ${
-                        isActive ? "shadow-xs" : "opacity-80 hover:opacity-100"
-                      }`}
-                      style={{
-                        minHeight: "44px",
-                        minWidth: "44px",
-                        background: isActive ? "var(--accent)" : "transparent",
-                        color: isActive ? "var(--accent-ink)" : "var(--primary-ink)",
-                      }}
-                      aria-current={isActive ? "page" : undefined}
-                      title={loc.full}
-                    >
-                      {loc.label}
-                    </button>
-                  );
-                })}
+                {isLanguageMenuOpen && (
+                  <div
+                    id="language-options"
+                    role="group"
+                    aria-label={t("language")}
+                    className="absolute right-0 top-full z-50 mt-2 w-56 rounded-[var(--radius-card)] border p-2 shadow-lg"
+                    style={{
+                      background: "var(--surface)",
+                      borderColor: "var(--border)",
+                    }}
+                  >
+                    {LOCALES.map((loc) => {
+                      const isActive = locale === loc.code;
+                      return (
+                        <button
+                          key={loc.code}
+                          type="button"
+                          aria-pressed={isActive}
+                          onClick={() => handleLocaleChange(loc.code)}
+                          className="flex min-h-12 w-full items-center justify-between rounded-xl px-3 text-left text-sm font-semibold transition-colors hover:bg-[var(--surface-2)] cursor-pointer"
+                          style={{
+                            color: isActive ? "var(--primary)" : "var(--ink)",
+                            background: isActive ? "var(--primary-light)" : "transparent",
+                          }}
+                        >
+                          <span>{loc.full}</span>
+                          {isActive && <span className="text-xs font-bold">{loc.label}</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </nav>
 
