@@ -158,7 +158,12 @@ export function LandingAlbumView({ onToggleGallery }: LandingAlbumViewProps) {
         </div>
       </section>
 
-      <section id="roles-section" aria-labelledby="roles-heading" className="scroll-mt-24 rounded-t-[32px] px-4 pb-12 pt-8 sm:px-6 lg:px-8 lg:pt-10" style={{ background: "var(--surface)" }}>
+      <section
+        id="roles-section"
+        aria-labelledby="roles-heading"
+        className="scroll-mt-24 mx-auto my-8 w-[calc(100%-2rem)] max-w-[1440px] rounded-[var(--radius-card)] border-2 px-4 pb-8 pt-7 sm:my-10 sm:w-[calc(100%-3rem)] sm:px-6 sm:pb-10 sm:pt-8 lg:px-8 lg:pt-10"
+        style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+      >
         <div className="mx-auto max-w-[1440px]">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4 sm:mb-8">
             <div className="flex items-center gap-4">
