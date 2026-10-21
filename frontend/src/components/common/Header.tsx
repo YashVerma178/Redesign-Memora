@@ -14,7 +14,7 @@ const LOCALES = [
   { code: "as", label: "অস", full: "অসমীয়া" },
   { code: "bn", label: "বাং", full: "বাংলা" },
   { code: "brx", label: "बड़", full: "बड़ो" },
-  { code: "mni", label: "ꯃꯩ", full: "মৈতৈলোন্" },
+  { code: "mni", label: "ꯃꯩ", full: "ꯃꯩꯇꯩꯂꯣꯟ" },
 ] as const;
 
 export function Header() {

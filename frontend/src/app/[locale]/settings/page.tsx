@@ -13,7 +13,7 @@ const LOCALES = [
   { code: "as", label: "অসমীয়া", script: "Bengali-Assamese (Assamese)" },
   { code: "bn", label: "বাংলা", script: "Bengali (Bengali)" },
   { code: "brx", label: "बड़ो", script: "Devanagari (Bodo)" },
-  { code: "mni", label: "ꯃꯩ", script: "Meetei Mayek (Manipuri)" },
+  { code: "mni", label: "ꯃꯩꯇꯩꯂꯣꯟ", script: "Meetei Mayek (Manipuri)" },
 ] as const;
 
 export default function SettingsPage() {
