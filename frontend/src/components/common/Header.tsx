@@ -98,7 +98,7 @@ export function Header() {
               </span>
               <span
                 className="text-[10px] font-semibold tracking-widest uppercase block leading-tight mt-0.5"
-                style={{ color: "#FFFFFF", opacity: 0.92 }}
+                style={{ color: "var(--primary-ink)", opacity: 0.92 }}
               >
                 {t("regionName")}
               </span>
